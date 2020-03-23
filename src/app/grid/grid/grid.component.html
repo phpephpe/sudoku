@@ -1,0 +1,40 @@
+<!-- <div
+>
+  <input
+    appCellInput
+    (focus)="cell.hasFocus = true"
+    (blur)="cell.hasFocus = false"
+    [min]="1"
+    [max]="grid.fullSize"
+    [ngClass]="{
+      focused: grid.isCellFocused(cell),
+      invalid: grid.isCellInvalid(cell),
+      valid: grid.isCellValid(cell),
+      'square-border': cell.isSquareBorder
+    }"
+  />
+</div> -->
+<div
+  *ngIf="grid"
+  class="grid"
+  [ngStyle]="{
+    'grid-template-rows': 'repeat(' + grid.size + ', 1fr)',
+    'grid-template-columns': 'repeat(' + grid.size + ', 1fr)'
+  }"
+>
+  <input
+    *ngFor="let cell of grid.cells"
+    class="grid-cell"
+    [ngStyle]="{
+      'grid-row': cell.row + ' / span 1',
+      'grid-column': cell.column + ' / span 1'
+    }"
+    type="number"
+    [ngModel]="cell.value"
+    (ngModelChange)="onCellValueChange($event, cell)"
+    [ngClass]="{
+      invalid: grid.isCellInvalid(cell),
+      valid: grid.isCellValid(cell)
+    }"
+  />
+</div>
