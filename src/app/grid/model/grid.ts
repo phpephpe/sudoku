@@ -1,6 +1,7 @@
 import { getRandomNumber, range } from "../../utils/math";
 import { GridCell } from "./grid-cell";
 import { GridCellGroup } from "./grid-cell-group";
+import { RawGrid } from "./raw-grid";
 
 export class Grid {
   readonly size: number;
@@ -11,15 +12,15 @@ export class Grid {
   columns: GridCellGroup[];
   squares: GridCellGroup[];
 
-  constructor(size: number) {
+  constructor(size: number, values?: number[]) {
     this.size = size;
     this.fullSize = Math.pow(size, 2);
 
-    this.createStructure();
+    this.createStructure(values);
     this.populateWithValues();
   }
 
-  createStructure() {
+  createStructure(values?: number[]) {
     this.cells = range(this.fullSize)
       .map(r => range(this.fullSize).map(c => ({ r, c })))
       .reduce((acc, val) => acc.concat(val), [])
@@ -36,6 +37,10 @@ export class Grid {
             this.fullSize
           )
       );
+
+    if (values) {
+      this.cells.forEach((c, i) => (c.value = values[i]));
+    }
 
     this.rows = range(this.fullSize).map(
       i => new GridCellGroup(this.cells.filter(c => c.row === i))
@@ -78,5 +83,13 @@ export class Grid {
         }
       }
     }
+  }
+
+  toRawGrid(): RawGrid {
+    return { size: this.size, values: this.cells.map(c => c.value) };
+  }
+
+  static fromRawGrid(rawGrid: RawGrid) {
+    return new Grid(rawGrid.size, rawGrid.values);
   }
 }

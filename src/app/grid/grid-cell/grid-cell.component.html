@@ -1,0 +1,8 @@
+<input
+  [ngClass]="{ invalid: cell?.isPartOfAnInvalidGroup() }"
+  type="text"
+  [value]="value"
+  (keydown)="onKeydown($event)"
+  (focus)="onFocus()"
+  (blur)="onBlur()"
+/>

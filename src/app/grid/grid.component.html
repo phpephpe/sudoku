@@ -1,0 +1,5 @@
+<div class="grid" *ngIf="grid">
+  <div class="row" *ngFor="let row of grid.rows">
+    <app-grid-cell *ngFor="let cell of row.cells" [cell]="cell"></app-grid-cell>
+  </div>
+</div>

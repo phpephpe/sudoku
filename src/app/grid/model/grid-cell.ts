@@ -42,4 +42,8 @@ export class GridCell {
 
     return allowedValues;
   }
+
+  isPartOfAnInvalidGroup() {
+    return this.groups.some(g => !g.isValid());
+  }
 }
