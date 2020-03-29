@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { GridSize } from "./grid/grid-size.enum";
 import { Grid } from "./grid/model/grid";
-import { StateService } from "./state.service";
+import { GridSize } from "./grid/model/grid-size.enum";
 
 @Component({
   selector: "app-root",
@@ -9,14 +8,20 @@ import { StateService } from "./state.service";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  grid?: Grid;
-
-  constructor(private stateService: StateService) {}
+  _grid: Grid;
+  set grid(grid: Grid) {
+    this._grid = grid;
+    this._grid.saveToLocalStorage();
+  }
+  get grid() {
+    return this._grid;
+  }
 
   ngOnInit() {
-    // TODO : NE MARCHE PAS
-    this.grid = this.stateService.hasAnything()
-      ? Grid.fromRawGrid(this.stateService.load())
-      : new Grid(GridSize.Three);
+    this.grid = Grid.loadFromLocalStorage() ?? new Grid(GridSize.Two);
+  }
+
+  onNewGrid(gridSize: GridSize) {
+    this.grid = new Grid(gridSize);
   }
 }

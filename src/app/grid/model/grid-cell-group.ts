@@ -12,10 +12,21 @@ export class GridCellGroup {
     return this.cells.filter(c => c.isSet()).map(c => c.value);
   }
 
+  isInvalid() {
+    const values = this.values();
+
+    return values.length !== distinct(values).length;
+  }
+
   isValid() {
     const values = this.values();
-    const unique = distinct(values);
+    return (
+      this.cells.every(c => c.isSet()) &&
+      values.length === distinct(values).length
+    );
+  }
 
-    return unique.length === values.length;
+  hasFocus() {
+    return this.cells.some(c => c.hasFocus);
   }
 }

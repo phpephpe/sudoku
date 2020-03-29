@@ -3,6 +3,8 @@ import { GridCell } from "./grid-cell";
 import { GridCellGroup } from "./grid-cell-group";
 import { RawGrid } from "./raw-grid";
 
+const LOCAL_STORAGE_KEY = "SUDOKU_GRID";
+
 export class Grid {
   readonly size: number;
   readonly fullSize: number;
@@ -16,11 +18,17 @@ export class Grid {
     this.size = size;
     this.fullSize = Math.pow(size, 2);
 
-    this.createStructure(values);
-    this.populateWithValues();
+    this.createStructure();
+
+    if (values) {
+      this.cells.forEach((c, i) => (c.value = values[i]));
+    } else {
+      this.populateWithValues();
+      this.applyDifficulty();
+    }
   }
 
-  createStructure(values?: number[]) {
+  createStructure() {
     this.cells = range(this.fullSize)
       .map(r => range(this.fullSize).map(c => ({ r, c })))
       .reduce((acc, val) => acc.concat(val), [])
@@ -37,10 +45,6 @@ export class Grid {
             this.fullSize
           )
       );
-
-    if (values) {
-      this.cells.forEach((c, i) => (c.value = values[i]));
-    }
 
     this.rows = range(this.fullSize).map(
       i => new GridCellGroup(this.cells.filter(c => c.row === i))
@@ -85,11 +89,36 @@ export class Grid {
     }
   }
 
+  applyDifficulty() {
+    this.squares.forEach(square => {
+      let deletedCount = 0;
+      while (deletedCount < square.cells.length / 2) {
+        const index = getRandomNumber(0, square.cells.length - 1);
+        if (square.cells[index].isSet()) {
+          square.cells[index].reset();
+          deletedCount++;
+        }
+      }
+    });
+  }
+
   toRawGrid(): RawGrid {
     return { size: this.size, values: this.cells.map(c => c.value) };
   }
 
   static fromRawGrid(rawGrid: RawGrid) {
     return new Grid(rawGrid.size, rawGrid.values);
+  }
+
+  saveToLocalStorage() {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.toRawGrid()));
+  }
+
+  static loadFromLocalStorage() {
+    const value = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+    if (value) {
+      return this.fromRawGrid(JSON.parse(value));
+    }
   }
 }

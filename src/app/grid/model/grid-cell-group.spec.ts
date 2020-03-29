@@ -9,9 +9,16 @@ describe("GridCellGroup", () => {
   it("should check the group validity correctly", () => {
     const validGroup = new GridCellGroup([
       new GridCell({ value: 1 }, 9),
+      new GridCell({ value: 2 }, 9),
+      new GridCell({ value: undefined }, 9)
+    ]);
+    expect(validGroup.isValid()).toBeFalse();
+
+    const validGroup1 = new GridCellGroup([
+      new GridCell({ value: 1 }, 9),
       new GridCell({ value: 2 }, 9)
     ]);
-    expect(validGroup.isValid()).toBeTrue();
+    expect(validGroup1.isValid()).toBeTrue();
 
     const invalidGroup = new GridCellGroup([
       new GridCell({ value: 1 }, 9),

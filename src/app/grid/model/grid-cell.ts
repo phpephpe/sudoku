@@ -7,8 +7,8 @@ export class GridCell {
   readonly row: number;
   readonly column: number;
   readonly square: number;
-
   value?: number;
+  hasFocus: boolean;
   groups: GridCellGroup[] = [];
 
   constructor(cell: Partial<GridCell>, fullSize: number) {
@@ -22,7 +22,7 @@ export class GridCell {
   }
 
   isSet() {
-    return this.value !== undefined;
+    return this.value != null;
   }
 
   reset() {
@@ -43,7 +43,17 @@ export class GridCell {
     return allowedValues;
   }
 
-  isPartOfAnInvalidGroup() {
-    return this.groups.some(g => !g.isValid());
+  isInvalid() {
+    return this.isSet() && this.groups.some(g => g.isInvalid());
+  }
+
+  isValid() {
+    return (
+      this.isSet() && !this.isInvalid() && this.groups.some(g => g.isValid())
+    );
+  }
+
+  isFocused() {
+    return this.groups.some(g => g.hasFocus());
   }
 }

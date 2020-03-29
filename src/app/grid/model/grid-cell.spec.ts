@@ -75,11 +75,11 @@ describe("GridCell", () => {
       ]
     );
 
-    expect(cell.isPartOfAnInvalidGroup()).toEqual(false);
+    expect(cell.isInvalid()).toEqual(false);
 
     const cells = cell.groups[0].cells;
     cells[cells.length - 1].value = cells[cells.length - 2].value;
 
-    expect(cell.isPartOfAnInvalidGroup()).toEqual(true);
+    expect(cell.isInvalid()).toEqual(true);
   });
 });

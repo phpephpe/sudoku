@@ -1,0 +1,17 @@
+<mat-button-toggle-group #gridSize="matButtonToggleGroup">
+  <mat-button-toggle [value]="GridSize.Two" [checked]="true">
+    4 x 4
+  </mat-button-toggle>
+  <mat-button-toggle [value]="GridSize.Three">
+    9 x 9
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+<button
+  type="button"
+  mat-raised-button
+  color="primary"
+  (click)="askForNewGrid(gridSize.value)"
+>
+  New grid
+</button>

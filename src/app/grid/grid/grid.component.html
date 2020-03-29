@@ -1,0 +1,14 @@
+<div class="grid" *ngIf="grid">
+  <div class="row" *ngFor="let row of grid.rows">
+    <app-grid-cell
+      *ngFor="let cell of row.cells"
+      [value]="cell.value"
+      (valueChange)="onCellValueChange($event, cell)"
+      (focus)="cell.hasFocus = true"
+      (blur)="cell.hasFocus = false"
+      [focused]="cell.isFocused()"
+      [invalid]="cell.isInvalid()"
+      [valid]="cell.isValid()"
+    ></app-grid-cell>
+  </div>
+</div>
