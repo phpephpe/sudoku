@@ -5,24 +5,24 @@ import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { BrowserModule } from "@angular/platform-browser";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { AppComponent } from "./app.component";
-import { GridCellComponent } from "./grid/grid-cell/grid-cell.component";
+import { CellInputDirective } from "./grid/cell-input.directive";
 import { GridComponent } from "./grid/grid/grid.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 @NgModule({
   declarations: [
     AppComponent,
-    GridCellComponent,
     GridComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    CellInputDirective,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     NoopAnimationsModule,
     MatButtonModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

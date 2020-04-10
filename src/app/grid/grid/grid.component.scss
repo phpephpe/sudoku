@@ -2,13 +2,45 @@
 
 .grid {
   font-size: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
   @include mat-elevation(14);
 
-  .row {
-    display: flex;
-    justify-content: space-between;
+  input {
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    & {
+      -moz-appearance: textfield;
+    }
+
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+    text-align: center;
+    font-size: inherit;
+    padding: 0;
+    margin: 0;
+    border: 1px solid lightgray;
+    outline: none;
+
+    &.focused,
+    &:hover {
+      border: 1px solid red;
+    }
+
+    &.invalid {
+      background-color: #ffb9b9;
+    }
+
+    &.valid {
+      background-color: lightgreen;
+    }
+
+    &.square-border {
+      border: 1px solid green;
+    }
   }
 }

@@ -1,14 +1,31 @@
-<div class="grid" *ngIf="grid">
-  <div class="row" *ngFor="let row of grid.rows">
-    <app-grid-cell
-      *ngFor="let cell of row.cells"
-      [value]="cell.value"
-      (valueChange)="onCellValueChange($event, cell)"
-      (focus)="cell.hasFocus = true"
-      (blur)="cell.hasFocus = false"
-      [focused]="cell.isFocused()"
-      [invalid]="cell.isInvalid()"
-      [valid]="cell.isValid()"
-    ></app-grid-cell>
-  </div>
+<div
+  class="grid"
+  *ngIf="grid"
+  [ngStyle]="{
+    'grid-template-rows': 'repeat(' + grid.size + ', 1fr)',
+    'grid-template-columns': 'repeat(' + grid.size + ', 1fr)'
+  }"
+>
+  <input
+    *ngFor="let cell of grid.cells"
+    [ngStyle]="{
+      'grid-row': cell.row + ' / span 1',
+      'grid-column': cell.column + ' / span 1'
+    }"
+    type="number"
+    appCellInput
+    [ngModel]="cell.value"
+    (ngModelChange)="onCellValueChange($event, cell)"
+    (focus)="cell.hasFocus = true"
+    (blur)="cell.hasFocus = false"
+    [min]="1"
+    [max]="grid.fullSize"
+    [ngClass]="{
+      focused: cell.isFocused(),
+      invalid: cell.isInvalid(),
+      valid: cell.isValid(),
+      'square-border':
+        cell.row % grid.size === 0 || cell.column % grid.size === 0
+    }"
+  />
 </div>

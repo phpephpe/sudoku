@@ -1,4 +1,4 @@
-import { distinct } from "../../utils/array";
+import { distinct } from "../../../utils/array";
 import { GridCell } from "./grid-cell";
 
 export class GridCellGroup {
@@ -9,7 +9,7 @@ export class GridCellGroup {
   }
 
   values() {
-    return this.cells.filter(c => c.isSet()).map(c => c.value);
+    return this.cells.filter((c) => c.isSet()).map((c) => c.value);
   }
 
   isInvalid() {
@@ -21,12 +21,12 @@ export class GridCellGroup {
   isValid() {
     const values = this.values();
     return (
-      this.cells.every(c => c.isSet()) &&
+      this.cells.every((c) => c.isSet()) &&
       values.length === distinct(values).length
     );
   }
 
   hasFocus() {
-    return this.cells.some(c => c.hasFocus);
+    return this.cells.some((c) => c.hasFocus);
   }
 }

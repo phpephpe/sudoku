@@ -1,5 +1,5 @@
-import { distinct, except } from "../../utils/array";
-import { range } from "../../utils/math";
+import { distinct, except } from "../../../utils/array";
+import { range } from "../../../utils/math";
 import { GridCellGroup } from "./grid-cell-group";
 
 export class GridCell {
@@ -7,7 +7,7 @@ export class GridCell {
   readonly row: number;
   readonly column: number;
   readonly square: number;
-  value?: number;
+  value: number | null = null;
   hasFocus: boolean;
   groups: GridCellGroup[] = [];
 
@@ -26,7 +26,7 @@ export class GridCell {
   }
 
   reset() {
-    this.value = undefined;
+    this.value = null;
   }
 
   everyPossibleValues() {
@@ -35,7 +35,9 @@ export class GridCell {
 
   allowedValues() {
     const groupValues = distinct(
-      this.groups.map(g => g.values()).reduce((acc, val) => acc.concat(val), [])
+      this.groups
+        .map((g) => g.values())
+        .reduce((acc, val) => acc.concat(val), [])
     );
 
     const allowedValues = except(this.everyPossibleValues(), groupValues);
@@ -44,16 +46,16 @@ export class GridCell {
   }
 
   isInvalid() {
-    return this.isSet() && this.groups.some(g => g.isInvalid());
+    return this.isSet() && this.groups.some((g) => g.isInvalid());
   }
 
   isValid() {
     return (
-      this.isSet() && !this.isInvalid() && this.groups.some(g => g.isValid())
+      this.isSet() && !this.isInvalid() && this.groups.some((g) => g.isValid())
     );
   }
 
   isFocused() {
-    return this.groups.some(g => g.hasFocus());
+    return this.groups.some((g) => g.hasFocus());
   }
 }

@@ -12,8 +12,9 @@ describe("Grid", () => {
     expect(grid.squares.length).toBe(fullSize);
     expect(grid.cells.length).toBe(fullSize * fullSize);
 
-    [...grid.rows, ...grid.columns, ...grid.squares].forEach(g =>
-      expect(g.isValid()).toBeTrue()
-    );
+    [...grid.rows, ...grid.columns, ...grid.squares].forEach((g) => {
+      expect(g.isValid()).toBeFalse();
+      expect(g.isInvalid()).toBeFalse();
+    });
   });
 });
