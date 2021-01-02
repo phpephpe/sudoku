@@ -6,12 +6,14 @@ describe("ToolbarComponent", () => {
   let component: ToolbarComponent;
   let fixture: ComponentFixture<ToolbarComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ToolbarComponent],
-      imports: [MatButtonToggleModule],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ToolbarComponent],
+        imports: [MatButtonToggleModule],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ToolbarComponent);

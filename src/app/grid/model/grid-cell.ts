@@ -4,6 +4,7 @@ export class GridCell {
   readonly square: number;
 
   value: number | null = null;
+  original: boolean = true;
 
   constructor(cell?: Partial<GridCell>) {
     if (cell) {
@@ -22,3 +23,5 @@ export class GridCell {
     this.value = null;
   }
 }
+
+export type RawGridCell = Pick<GridCell, "value" | "original">;

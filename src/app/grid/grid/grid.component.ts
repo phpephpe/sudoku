@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { Grid } from "../model/grid";
+import { Component } from "@angular/core";
+import { GridService } from "../grid.service";
 import { GridCell } from "../model/grid-cell";
 
 @Component({
@@ -8,11 +8,21 @@ import { GridCell } from "../model/grid-cell";
   styleUrls: ["./grid.component.scss"],
 })
 export class GridComponent {
-  @Input() grid: Grid;
-  @Output() gridChange = new EventEmitter();
+  get grid() {
+    return this.gridService.grid;
+  }
+
+  constructor(public gridService: GridService) {}
 
   onCellValueChange(value: number, cell: GridCell) {
-    cell.value = value;
-    this.gridChange.emit();
+    this.gridService.setCellValue(value, cell);
+  }
+
+  onCellFocus(cell: GridCell) {
+    this.gridService.focusCell(cell);
+  }
+
+  onCellBlur() {
+    this.gridService.blurCell();
   }
 }

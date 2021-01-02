@@ -1,3 +1,4 @@
+import { Component } from "@angular/core";
 import { TestBed, waitForAsync } from "@angular/core/testing";
 import { AppComponent } from "./app.component";
 
@@ -5,7 +6,7 @@ describe("AppComponent", () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [AppComponent],
+        declarations: [AppComponent, MockAppGrid, MockAppToolbar],
       }).compileComponents();
     })
   );
@@ -16,3 +17,9 @@ describe("AppComponent", () => {
     expect(app).toBeTruthy();
   });
 });
+
+@Component({ selector: "app-grid" })
+class MockAppGrid {}
+
+@Component({ selector: "app-toolbar" })
+class MockAppToolbar {}
