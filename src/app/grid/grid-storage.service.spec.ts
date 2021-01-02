@@ -1,13 +1,13 @@
 import { TestBed } from "@angular/core/testing";
-import { GridStateService } from "./grid-state.service";
+import { GridStorageService } from "./grid-storage.service";
 import { Grid } from "./model/grid";
 
 describe("GridStateService", () => {
-  let service: GridStateService;
+  let service: GridStorageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GridStateService);
+    service = TestBed.inject(GridStorageService);
   });
 
   it("should be created", () => {
@@ -24,7 +24,7 @@ describe("GridStateService", () => {
     expect(gridFromLocalStorage).toEqual(
       JSON.stringify({
         size: grid.size,
-        values: grid.cells.map((c) => c.value),
+        cells: grid.cells.map((c) => ({ value: c.value, original: c.original })),
       })
     );
 

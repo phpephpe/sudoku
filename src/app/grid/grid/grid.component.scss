@@ -1,46 +1,41 @@
 @import "~@angular/material/theming";
 
+$cell-size: 60px;
+
 .grid {
   font-size: 24px;
   display: grid;
   @include mat-elevation(14);
 
-  .grid-cell {
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    & {
-      -moz-appearance: textfield;
-    }
-
-    height: 60px;
-    width: 60px;
-    text-align: center;
+  div {
+    height: $cell-size;
+    width: $cell-size;
     cursor: pointer;
-    text-align: center;
-    font-size: inherit;
-    padding: 0;
-    margin: 0;
     border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     outline: none;
 
-    &.focused,
-    &:hover {
-      border: 1px solid red !important;
+    &.valid {
+      color: green;
     }
 
     &.invalid {
-      background-color: #ffb9b9;
+      color: red;
     }
 
-    &.valid {
-      background-color: lightgreen;
+    &.focused {
+      background-color: rgb(225, 247, 255);
     }
 
-    &.square-border {
-      border: 2px solid green;
+    &.focusedCell {
+      border-color: grey;
+    }
+
+    &.readonly {
+      color: grey;
+      cursor: not-allowed;
     }
   }
 }

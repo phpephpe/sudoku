@@ -1,6 +1,6 @@
 import { distinct, except } from "../../../utils/array";
 import { getRandomNumber, range } from "../../../utils/math";
-import { GridCell } from "./grid-cell";
+import { GridCell, RawGridCell } from "./grid-cell";
 import { GridCellGroup } from "./grid-cell-group";
 
 export class Grid {
@@ -12,17 +12,20 @@ export class Grid {
   columns: GridCellGroup[];
   squares: GridCellGroup[];
 
-  constructor(size: number, values?: number[]) {
+  constructor(size: number, cells?: RawGridCell[]) {
     this.size = size;
     this.fullSize = Math.pow(size, 2);
 
     this.createGridStructure();
 
-    if (values) {
-      this.cells.forEach((c, i) => (c.value = values[i]));
+    if (cells) {
+      this.cells.forEach((c, i) => {
+        c.value = cells[i].value;
+        c.original = cells[i].original;
+      });
     } else {
       this.populateGridWithValues();
-      // this.applyDifficulty();
+      this.applyDifficulty();
     }
   }
 
@@ -80,8 +83,26 @@ export class Grid {
     }
   }
 
-  private getCellGroups(cell: GridCell) {
-    return [this.rows[cell.row - 1], this.columns[cell.column - 1], this.squares[cell.square - 1]];
+  private applyDifficulty() {
+    const countToHide = this.cells.length / 2;
+    const indexes: number[] = [];
+
+    for (var i = 0; i < countToHide; i++) {
+      let index = -1;
+
+      index = getRandomNumber(0, this.cells.length - 1);
+      while (indexes.includes(index)) {
+        index = getRandomNumber(0, this.cells.length - 1);
+      }
+
+      indexes.push(index);
+    }
+
+    indexes.forEach((index) => {
+      const cell = this.cells[index];
+      cell.reset();
+      cell.original = false;
+    });
   }
 
   getCellAllowedValues(cell: GridCell) {
@@ -96,32 +117,12 @@ export class Grid {
     return allowedValues;
   }
 
-  isCellInvalid(cell: GridCell) {
-    return cell.isSet() && this.getCellGroups(cell).some((g) => g.isInvalid());
+  getCellGroups(cell: GridCell) {
+    return [this.rows[cell.row - 1], this.columns[cell.column - 1], this.squares[cell.square - 1]];
   }
+}
 
-  isCellValid(cell: GridCell) {
-    return (
-      cell.isSet() &&
-      !this.isCellInvalid(cell) &&
-      this.getCellGroups(cell).every((g) => g.isValid())
-    );
-  }
-
-  // isCellFocused(cell: GridCell) {
-  //   return cell.groups.some((g) => g.hasFocus());
-  // }
-
-  // applyDifficulty() {
-  //   this.squares.forEach((square) => {
-  //     let deletedCount = 0;
-  //     while (deletedCount < square.cells.length / 2) {
-  //       const index = getRandomNumber(0, square.cells.length - 1);
-  //       if (square.cells[index].isSet) {
-  //         square.cells[index].reset();
-  //         deletedCount++;
-  //       }
-  //     }
-  //   });
-  // }
+export interface RawGrid {
+  size: number;
+  cells: RawGridCell[];
 }

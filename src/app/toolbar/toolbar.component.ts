@@ -11,7 +11,7 @@ export class ToolbarComponent {
 
   @Output() newGrid = new EventEmitter<GridSize>();
 
-  askForNewGrid(gridSize: GridSize) {
+  onNewGrid(gridSize: GridSize) {
     this.newGrid.emit(gridSize);
   }
 }

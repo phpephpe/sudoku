@@ -1,4 +1,5 @@
 import { Grid } from "./grid";
+import { mockValidRawGrid } from "./mocks";
 
 describe("Grid", () => {
   it("should create an instance of grid", () => {
@@ -16,42 +17,24 @@ describe("Grid", () => {
   });
 
   it("should create an instance of grid from existing values", () => {
-    const cells = [1, 2, 3, 4, 2, 3, 4, 1, 3, 4, 1, 2, 4, 1, 2, 3];
+    const cells = mockValidRawGrid().cells;
     const grid = new Grid(2, cells);
 
-    expect(cells).toEqual(grid.cells.map((c) => c.value));
+    expect(cells).toEqual(grid.cells.map((c) => ({ value: c.value, original: c.original })));
+  });
+
+  it("should apply brute difficutly", () => {
+    const grid = new Grid(2);
+
+    expect(grid.cells.filter((c) => c.isSet()).length).toBe(8);
   });
 
   it("should return allowed values for a cell", () => {
-    const grid = new Grid(2, [1, 2, 3, 4, 2, 3, 4, 1, 3, 4, 1, 2, 4, 1, 2, null]);
+    const cells = mockValidRawGrid().cells;
+    cells[cells.length - 1].value = null;
+    const grid = new Grid(2, cells);
     const lastCell = grid.cells[grid.cells.length - 1];
 
     expect(grid.getCellAllowedValues(lastCell)).toEqual([3]);
-  });
-
-  it("should check if a cell is invalid", () => {
-    const grid = new Grid(2, [1, 2, 3, 4, 2, 3, 4, 1, 3, 4, 1, 2, 4, 1, 2, null]);
-    const lastCell = grid.cells[grid.cells.length - 1];
-
-    expect(grid.isCellInvalid(lastCell)).toBeFalse();
-
-    lastCell.value = 4;
-
-    expect(grid.isCellInvalid(lastCell)).toBeTrue();
-  });
-
-  it("should check if a cell is valid", () => {
-    const grid = new Grid(2, [1, 2, 3, 4, 2, 3, 4, 1, 3, 4, 1, 2, 4, 1, 2, null]);
-    const lastCell = grid.cells[grid.cells.length - 1];
-
-    expect(grid.isCellValid(lastCell)).toBeFalse();
-
-    lastCell.value = 4;
-
-    expect(grid.isCellValid(lastCell)).toBeFalse();
-
-    lastCell.value = 3;
-
-    expect(grid.isCellValid(lastCell)).toBeTrue();
   });
 });

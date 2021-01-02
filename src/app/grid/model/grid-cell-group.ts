@@ -14,16 +14,11 @@ export class GridCellGroup {
 
   isValid() {
     const values = this.values();
-
-    return (
-      this.cells.every((c) => c.isSet()) &&
-      values.length === distinct(values).length
-    );
+    return this.cells.every((c) => c.isSet()) && values.length === distinct(values).length;
   }
 
   isInvalid() {
     const values = this.values();
-
     return values.length !== distinct(values).length;
   }
 }
