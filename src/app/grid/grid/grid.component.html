@@ -25,6 +25,7 @@
     (focus)="onCellFocus(cell)"
     (blur)="onCellBlur()"
     (valueChange)="onCellValueChange($event, cell)"
+    (move)="onMove($event, cell)"
   >
     {{ cell.value }}
   </div>

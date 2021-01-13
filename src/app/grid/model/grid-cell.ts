@@ -1,12 +1,16 @@
-export class GridCell {
-  readonly row: number;
-  readonly column: number;
-  readonly square: number;
+export class GridCellCoordinates {
+  row: number;
+  column: number;
+  square: number;
+}
 
+export class GridCell extends GridCellCoordinates {
   value: number | null = null;
   original: boolean = true;
 
   constructor(cell?: Partial<GridCell>) {
+    super();
+
     if (cell) {
       this.row = cell.row;
       this.column = cell.column;

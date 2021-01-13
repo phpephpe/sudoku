@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { KeyboardEventKey } from "../../../utils/keyboard-event-key.enum";
 import { GridService } from "../grid.service";
 import { GridCell } from "../model/grid-cell";
 
@@ -16,6 +17,10 @@ export class GridComponent {
 
   onCellValueChange(value: number, cell: GridCell) {
     this.gridService.setCellValue(value, cell);
+  }
+
+  onMove(keyboardKey: KeyboardEventKey, cell: GridCell) {
+    this.gridService.moveFocus(keyboardKey, cell);
   }
 
   onCellFocus(cell: GridCell) {

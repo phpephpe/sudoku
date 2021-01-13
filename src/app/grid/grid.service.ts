@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
+import { KeyboardEventKey } from "../../utils/keyboard-event-key.enum";
 import { GridStorageService } from "./grid-storage.service";
 import { Grid } from "./model/grid";
-import { GridCell } from "./model/grid-cell";
+import { GridCell, GridCellCoordinates } from "./model/grid-cell";
 import { GridSize } from "./model/grid-size.enum";
 
 @Injectable({
@@ -20,7 +21,7 @@ export class GridService {
     return this._grid;
   }
 
-  focusedCell?: GridCell;
+  focusedCell?: GridCellCoordinates;
 
   constructor(private gridStorageService: GridStorageService) {}
 
@@ -39,6 +40,14 @@ export class GridService {
   setCellValue(value: number, cell: GridCell) {
     this.grid.cells.find((c) => c.column === cell.column && c.row === cell.row).value = value;
     this.save();
+  }
+
+  moveFocus(keyboardKey: KeyboardEventKey, cell: GridCell) {
+    let index = cell.row;
+
+    if (keyboardKey === KeyboardEventKey.ArrowRight || keyboardKey === KeyboardEventKey.ArrowLeft) {
+      index = cell.column;
+    }
   }
 
   focusCell(cell: GridCell) {
