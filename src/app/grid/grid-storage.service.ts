@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { Grid, RawGrid } from "./model/grid";
+import { Injectable } from '@angular/core';
+import { Grid, RawGrid } from './model/grid';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class GridStorageService {
-  private LOCAL_STORAGE_KEY = "SUDOKU_GRID";
+  private LOCAL_STORAGE_KEY = 'SUDOKU_GRID';
 
   private toRawGrid(grid: Grid): RawGrid {
     return {

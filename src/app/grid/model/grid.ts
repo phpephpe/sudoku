@@ -1,7 +1,7 @@
-import { distinct, except } from "../../../utils/array";
-import { getRandomNumber, range } from "../../../utils/math";
-import { GridCell, RawGridCell } from "./grid-cell";
-import { GridCellGroup } from "./grid-cell-group";
+import { distinct, except } from '../../../utils/array';
+import { getRandomNumber, range } from '../../../utils/math';
+import { GridCell, RawGridCell } from './grid-cell';
+import { GridCellGroup } from './grid-cell-group';
 
 export class Grid {
   readonly size: number;
@@ -87,7 +87,7 @@ export class Grid {
     const countToHide = this.cells.length / 2;
     const indexes: number[] = [];
 
-    for (var i = 0; i < countToHide; i++) {
+    for (let i = 0; i < countToHide; i++) {
       let index = -1;
 
       index = getRandomNumber(0, this.cells.length - 1);

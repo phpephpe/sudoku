@@ -1,5 +1,5 @@
-import { RawGrid } from "./grid";
-import { RawGridCell } from "./grid-cell";
+import { RawGrid } from './grid';
+import { RawGridCell } from './grid-cell';
 
 export function mockRawCell(override?: Partial<RawGridCell>): RawGridCell {
   return { value: 1, original: false, ...override };

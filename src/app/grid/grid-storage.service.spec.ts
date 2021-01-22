@@ -1,8 +1,8 @@
-import { TestBed } from "@angular/core/testing";
-import { GridStorageService } from "./grid-storage.service";
-import { Grid } from "./model/grid";
+import { TestBed } from '@angular/core/testing';
+import { GridStorageService } from './grid-storage.service';
+import { Grid } from './model/grid';
 
-describe("GridStateService", () => {
+describe('GridStateService', () => {
   let service: GridStorageService;
 
   beforeEach(() => {
@@ -10,16 +10,16 @@ describe("GridStateService", () => {
     service = TestBed.inject(GridStorageService);
   });
 
-  it("should be created", () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it("should store and restore a grid state properly", () => {
+  it('should store and restore a grid state properly', () => {
     const grid = new Grid(2);
 
     service.saveToLocalStorage(grid);
 
-    const gridFromLocalStorage = localStorage.getItem("SUDOKU_GRID");
+    const gridFromLocalStorage = localStorage.getItem('SUDOKU_GRID');
 
     expect(gridFromLocalStorage).toEqual(
       JSON.stringify({

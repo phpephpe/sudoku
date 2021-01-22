@@ -1,5 +1,5 @@
-import { distinct } from "../../../utils/array";
-import { GridCell } from "./grid-cell";
+import { distinct } from '../../../utils/array';
+import { GridCell } from './grid-cell';
 
 export class GridCellGroup {
   cells?: Array<GridCell>;

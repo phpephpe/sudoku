@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { MatButtonToggleModule } from "@angular/material/button-toggle";
-import { ToolbarComponent } from "./toolbar.component";
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { ToolbarComponent } from './toolbar.component';
 
-describe("ToolbarComponent", () => {
+describe('ToolbarComponent', () => {
   let component: ToolbarComponent;
   let fixture: ComponentFixture<ToolbarComponent>;
 
@@ -21,7 +21,7 @@ describe("ToolbarComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

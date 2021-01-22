@@ -3,5 +3,5 @@ export function distinct<T>(arr: Array<T>) {
 }
 
 export function except<T>(src: Array<T>, arr: Array<T>) {
-  return src.filter(val => !arr.includes(val));
+  return src.filter((val) => !arr.includes(val));
 }

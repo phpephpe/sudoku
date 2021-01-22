@@ -3,36 +3,42 @@
 
 module.exports = function (config) {
   config.set({
-    basePath: "",
-    frameworks: ["jasmine", "@angular-devkit/build-angular"],
+    basePath: '',
+    frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
-      require("karma-jasmine"),
-      require("karma-chrome-launcher"),
-      require("karma-jasmine-html-reporter"),
-      require("karma-coverage-istanbul-reporter"),
-      require("@angular-devkit/build-angular/plugins/karma"),
+      require('karma-jasmine'),
+      require('karma-chrome-launcher'),
+      require('karma-jasmine-html-reporter'),
+      require('karma-coverage'),
+      require('@angular-devkit/build-angular/plugins/karma'),
+      require('karma-sonarqube-unit-reporter'),
     ],
     client: {
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },
-    coverageIstanbulReporter: {
-      dir: require("path").join(__dirname, "./coverage/sudoku"),
-      reports: ["html", "lcovonly", "text-summary", "text"],
-      fixWebpackSourcePaths: true,
-    },
-    reporters: ["progress", "kjhtml"],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ["Chrome", "ChromeHeadlessCI"],
+    browsers: ['Chrome', 'ChromeHeadlessCI'],
     singleRun: false,
     restartOnFileChange: true,
     customLaunchers: {
       ChromeHeadlessCI: {
-        base: "ChromeHeadless",
-        flags: ["--no-sandbox"],
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox'],
       },
+    },
+
+    // Coverage
+    reporters: ['progress', 'sonarqubeUnit', 'coverage', 'kjhtml'],
+    coverageReporter: {
+      reporters: [{ type: 'text' }, { type: 'lcov' }],
+    },
+    sonarQubeUnitReporter: {
+      sonarQubeVersion: 'LATEST',
+      outputFile: 'coverage/coverage.xml',
+      useBrowserName: false,
     },
   });
 };

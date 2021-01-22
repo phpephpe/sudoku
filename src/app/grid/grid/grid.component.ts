@@ -1,12 +1,12 @@
-import { Component } from "@angular/core";
-import { KeyboardEventKey } from "../../../utils/keyboard-event-key.enum";
-import { GridService } from "../grid.service";
-import { GridCell } from "../model/grid-cell";
+import { Component } from '@angular/core';
+import { KeyboardEventKey } from '../../../utils/keyboard-event-key.enum';
+import { GridService } from '../grid.service';
+import { GridCell } from '../model/grid-cell';
 
 @Component({
-  selector: "app-grid",
-  templateUrl: "./grid.component.html",
-  styleUrls: ["./grid.component.scss"],
+  selector: 'app-grid',
+  templateUrl: './grid.component.html',
+  styleUrls: ['./grid.component.scss'],
 })
 export class GridComponent {
   get grid() {

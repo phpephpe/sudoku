@@ -1,11 +1,11 @@
-import { GridCell } from "./grid-cell";
+import { GridCell } from './grid-cell';
 
-describe("GridCell", () => {
-  it("should create an instance", () => {
+describe('GridCell', () => {
+  it('should create an instance', () => {
     expect(new GridCell({ value: 1 })).toBeDefined();
   });
 
-  it("should check whether the value is set or not", () => {
+  it('should check whether the value is set or not', () => {
     const cell = new GridCell();
 
     expect(cell.isSet()).toBeFalse();
@@ -15,7 +15,7 @@ describe("GridCell", () => {
     expect(cell.isSet()).toBeTrue();
   });
 
-  it("should reset value correctly", () => {
+  it('should reset value correctly', () => {
     const cell = new GridCell({ value: 1 });
     expect(cell.isSet()).toBeTrue();
 

@@ -1,12 +1,12 @@
-import { GridCell } from "./grid-cell";
-import { GridCellGroup } from "./grid-cell-group";
+import { GridCell } from './grid-cell';
+import { GridCellGroup } from './grid-cell-group';
 
-describe("GridCellGroup", () => {
-  it("should create an instance", () => {
+describe('GridCellGroup', () => {
+  it('should create an instance', () => {
     expect(new GridCellGroup()).toBeDefined();
   });
 
-  it("should return group's values correctly", () => {
+  it('should return group values correctly', () => {
     const group = new GridCellGroup([
       new GridCell({ value: 1 }),
       new GridCell({ value: 2 }),
@@ -22,7 +22,7 @@ describe("GridCellGroup", () => {
     expect(group.values()).toEqual([1, 2]);
   });
 
-  it("should check the group validity correctly", () => {
+  it('should check the group validity correctly', () => {
     const group1 = new GridCellGroup([
       new GridCell({ value: 1 }),
       new GridCell({ value: 2 }),
@@ -30,10 +30,7 @@ describe("GridCellGroup", () => {
     ]);
     expect(group1.isValid()).toBeFalse();
 
-    const group2 = new GridCellGroup([
-      new GridCell({ value: 1 }),
-      new GridCell({ value: 2 }),
-    ]);
+    const group2 = new GridCellGroup([new GridCell({ value: 1 }), new GridCell({ value: 2 })]);
     expect(group2.isValid()).toBeTrue();
 
     const group3 = new GridCellGroup([
@@ -44,7 +41,7 @@ describe("GridCellGroup", () => {
     expect(group3.isValid()).toBeFalse();
   });
 
-  it("should check the group invalidity correctly", () => {
+  it('should check the group invalidity correctly', () => {
     const group1 = new GridCellGroup([
       new GridCell({ value: 1 }),
       new GridCell({ value: 2 }),

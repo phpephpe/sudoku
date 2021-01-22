@@ -6,7 +6,7 @@ export class GridCellCoordinates {
 export class GridCell extends GridCellCoordinates {
   square: number;
   value: number | null = null;
-  original: boolean = true;
+  original = true;
 
   constructor(cell?: Partial<GridCell>) {
     super();
@@ -28,4 +28,4 @@ export class GridCell extends GridCellCoordinates {
   }
 }
 
-export type RawGridCell = Pick<GridCell, "value" | "original">;
+export type RawGridCell = Pick<GridCell, 'value' | 'original'>;

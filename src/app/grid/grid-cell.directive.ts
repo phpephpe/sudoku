@@ -1,8 +1,8 @@
-import { Directive, EventEmitter, HostListener, Input, Output } from "@angular/core";
-import { KeyboardEventKey } from "../../utils/keyboard-event-key.enum";
+import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { KeyboardEventKey } from '../../utils/keyboard-event-key.enum';
 
 @Directive({
-  selector: "[appGridCell]",
+  selector: '[appGridCell]',
 })
 export class GridCellDirective {
   @Input() min: number;
@@ -12,7 +12,7 @@ export class GridCellDirective {
   @Output() valueChange = new EventEmitter<number>();
   @Output() move = new EventEmitter<KeyboardEventKey>();
 
-  @HostListener("keydown", ["$event"])
+  @HostListener('keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
     event.preventDefault();
 

@@ -1,24 +1,24 @@
-import { Injectable } from "@angular/core";
-import { KeyboardEventKey } from "../../utils/keyboard-event-key.enum";
-import { GridStorageService } from "./grid-storage.service";
-import { Grid } from "./model/grid";
-import { GridCell, GridCellCoordinates } from "./model/grid-cell";
-import { GridSize } from "./model/grid-size.enum";
+import { Injectable } from '@angular/core';
+import { KeyboardEventKey } from '../../utils/keyboard-event-key.enum';
+import { GridStorageService } from './grid-storage.service';
+import { Grid } from './model/grid';
+import { GridCell, GridCellCoordinates } from './model/grid-cell';
+import { GridSize } from './model/grid-size.enum';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class GridService {
-  _grid?: Grid;
+  pgrid?: Grid;
   set grid(grid: Grid) {
-    this._grid = grid;
-    this.gridStorageService.saveToLocalStorage(this._grid);
+    this.pgrid = grid;
+    this.gridStorageService.saveToLocalStorage(this.pgrid);
   }
   get grid() {
-    if (!this._grid) {
-      this._grid = this.gridStorageService.loadFromLocalStorage();
+    if (!this.pgrid) {
+      this.pgrid = this.gridStorageService.loadFromLocalStorage();
     }
-    return this._grid;
+    return this.pgrid;
   }
 
   focusedCell?: GridCell;
