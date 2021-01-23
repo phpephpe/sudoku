@@ -24,7 +24,7 @@ jobs:
           check-latest: true
       - run: npm install
       - run: npm run validate-ci
- sonarcloud:
+  sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
