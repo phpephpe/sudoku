@@ -24,6 +24,13 @@ jobs:
         with:
           node-version: '14'
           check-latest: true
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
       - name: Validate
         run: npm run validate-ci
