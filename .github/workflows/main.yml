@@ -27,10 +27,12 @@ jobs:
       - run: npm install
   validate:
     name: Validate
+    needs: [prepare]
     runs-on: ubuntu-latest
     steps:
       - run: npm run validate-ci
   sonarcloud-analysis:
+    needs: [validate]
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
