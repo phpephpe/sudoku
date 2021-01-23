@@ -14,8 +14,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  prepare:
-    name: Prepare
+  QA:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,19 +25,12 @@ jobs:
           node-version: '14'
           check-latest: true
       - run: npm install
-  validate:
-    name: Validate
-    needs: [prepare]
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm run validate-ci
-  sonarcloud-analysis:
-    needs: [validate]
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - name: SonarCloud Scan
+      - name: Validate
+        run: npm run validate-ci
+      - name: Build
+        run: npm build
+      - name: SonarCloud Analysis
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
