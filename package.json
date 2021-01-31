@@ -8,7 +8,7 @@
     "test": "ng test --codeCoverage=true --browsers=ChromeHeadlessCI",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "validate-ci": "npm run lint-ci && npm run test-ci && npm run build",
+    "validate-ci": "npm run lint-ci && npm run test-ci",
     "test-ci": "ng test --codeCoverage=true --no-progress --watch=false --browsers=ChromeHeadlessCI",
     "lint-ci": "npx prettier --check \"./src/**/*.ts\"",
     "build-ci": "ng build",
