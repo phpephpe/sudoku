@@ -37,6 +37,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Build
+        run: npm run build-ci
       - name: Deployment
         if: github.ref == 'refs/heads/master'
         run: npm run deploy-ci ${{ secrets.NETLIFY_SITE_ID }} ${{ secrets.NETLIFY_AUTH_TOKEN }}

@@ -10,7 +10,9 @@
     "e2e": "ng e2e",
     "validate-ci": "npm run lint-ci && npm run test-ci && npm run build",
     "test-ci": "ng test --codeCoverage=true --no-progress --watch=false --browsers=ChromeHeadlessCI",
-    "lint-ci": "npx prettier --check \"./src/**/*.ts\""
+    "lint-ci": "npx prettier --check \"./src/**/*.ts\"",
+    "build-ci": "ng build",
+    "deploy-ci": "sh ./scripts/deploy.sh"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +46,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "netlify-cli": "^3.4.6",
     "prettier": "^2.2.1",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
