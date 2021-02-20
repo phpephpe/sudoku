@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { KeyboardEventKey } from '../../utils/keyboard-event-key.enum';
+import { MoveEventKey } from '../../utils/move-event-key.enum';
 import { GridStorageService } from './grid-storage.service';
 import { Grid } from './model/grid';
 import { GridCell, GridCellCoordinates } from './model/grid-cell';
@@ -46,20 +46,20 @@ export class GridService {
     this.save();
   }
 
-  moveFocus(keyboardKey: KeyboardEventKey, fromCell?: GridCellCoordinates) {
+  moveFocus(keyboardKey: MoveEventKey, fromCell?: GridCellCoordinates) {
     let { row, column } = fromCell ?? this.focusedCell;
 
     switch (keyboardKey) {
-      case KeyboardEventKey.ArrowUp:
+      case MoveEventKey.ArrowUp:
         row--;
         break;
-      case KeyboardEventKey.ArrowDown:
+      case MoveEventKey.ArrowDown:
         row++;
         break;
-      case KeyboardEventKey.ArrowRight:
+      case MoveEventKey.ArrowRight:
         column++;
         break;
-      case KeyboardEventKey.ArrowLeft:
+      case MoveEventKey.ArrowLeft:
         column--;
         break;
     }
@@ -97,6 +97,10 @@ export class GridService {
 
   blurCell() {
     this.focusedCell = undefined;
+  }
+
+  eraseCell() {
+    this.focusedCell?.reset();
   }
 
   isCellPartOfAFocusedGroup(cell: GridCell) {

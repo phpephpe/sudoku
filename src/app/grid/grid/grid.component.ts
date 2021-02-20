@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { KeyboardEventKey } from '../../../utils/keyboard-event-key.enum';
+import { MoveEventKey } from '../../../utils/move-event-key.enum';
 import { GridService } from '../grid.service';
 import { GridCell } from '../model/grid-cell';
 
@@ -19,7 +19,7 @@ export class GridComponent {
     this.gridService.setCellValue(value);
   }
 
-  onMove(keyboardKey: KeyboardEventKey) {
+  onMove(keyboardKey: MoveEventKey) {
     this.gridService.moveFocus(keyboardKey);
   }
 
@@ -29,5 +29,9 @@ export class GridComponent {
 
   onCellBlur() {
     this.gridService.blurCell();
+  }
+
+  onCellErase() {
+    this.gridService.eraseCell();
   }
 }

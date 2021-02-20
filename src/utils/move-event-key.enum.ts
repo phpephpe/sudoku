@@ -1,4 +1,4 @@
-export enum KeyboardEventKey {
+export enum MoveEventKey {
   ArrowUp,
   ArrowRight,
   ArrowDown,

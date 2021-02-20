@@ -1,5 +1,6 @@
 import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { KeyboardEventKey } from '../../utils/keyboard-event-key.enum';
+import { EraseEventKey } from '../../utils/erase-event-key.enum';
+import { MoveEventKey } from '../../utils/move-event-key.enum';
 
 @Directive({
   selector: '[appGridCell]',
@@ -10,7 +11,8 @@ export class GridCellDirective {
   @Input() readonly: boolean;
 
   @Output() valueChange = new EventEmitter<number>();
-  @Output() move = new EventEmitter<KeyboardEventKey>();
+  @Output() move = new EventEmitter<MoveEventKey>();
+  @Output() erase = new EventEmitter();
 
   @HostListener('keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
@@ -24,8 +26,10 @@ export class GridCellDirective {
 
     if (!isNaN(value) && this.min <= value && value <= this.max) {
       this.valueChange.emit(value);
-    } else if (KeyboardEventKey[event.key] != null) {
-      this.move.emit(KeyboardEventKey[event.key]);
+    } else if (MoveEventKey[event.key] != null) {
+      this.move.emit(MoveEventKey[event.key]);
+    } else if (EraseEventKey[event.key] != null) {
+      this.erase.emit();
     }
   }
 }
