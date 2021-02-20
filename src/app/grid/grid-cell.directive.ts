@@ -8,7 +8,6 @@ import { MoveEventKey } from '../../utils/move-event-key.enum';
 export class GridCellDirective {
   @Input() min: number;
   @Input() max: number;
-  @Input() readonly: boolean;
 
   @Output() valueChange = new EventEmitter<number>();
   @Output() move = new EventEmitter<MoveEventKey>();
@@ -17,10 +16,6 @@ export class GridCellDirective {
   @HostListener('keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
     event.preventDefault();
-
-    if (this.readonly) {
-      return;
-    }
 
     const value = +event.key;
 

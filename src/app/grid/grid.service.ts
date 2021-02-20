@@ -42,6 +42,10 @@ export class GridService {
   }
 
   setCellValue(value: number) {
+    if (this.focusedCell?.original) {
+      return;
+    }
+
     this.focusedCell.value = value;
     this.save();
   }
@@ -76,22 +80,11 @@ export class GridService {
       column = this.grid.fullSize;
     }
 
-    const c = this.findCell({ row, column });
-
-    if (c.original) {
-      this.moveFocus(keyboardKey, { row, column });
-    } else {
-      this.focusCell({ row, column });
-    }
+    this.focusCell({ row, column });
   }
 
   focusCell(cell: GridCellCoordinates) {
     const c = this.findCell(cell);
-
-    if (c.original) {
-      return;
-    }
-
     this.focusedCell = c;
   }
 

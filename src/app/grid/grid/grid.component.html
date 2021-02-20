@@ -12,7 +12,6 @@
     [attr.tabindex]="cell.readonly ? null : index"
     [min]="1"
     [max]="grid.fullSize"
-    [readonly]="cell.original"
     [class.readonly]="cell.original"
     [class.focused]="gridService.isCellPartOfAFocusedGroup(cell)"
     [class.focusedCell]="gridService.isFocusedCell(cell)"
