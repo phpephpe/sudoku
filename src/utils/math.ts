@@ -7,3 +7,9 @@ export function range(count: number, start: number = 0) {
     .fill(null)
     .map((v, i) => i + start);
 }
+
+export function range(count: number, start: number = 0) {
+  return Array(count)
+    .fill(null)
+    .map((v, i) => i + start);
+}
